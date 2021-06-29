@@ -44,6 +44,10 @@ func (c Client) SendLivechatMessage(msg *models.LivechatMessage) error {
 }
 
 func initialLivechatDataFromDocument(doc *gabs.Container) *models.LivechatInitialData {
+	allowSwitchDepartments, _ := doc.Path("allowSwitchDepartments").Data().(bool)
+	nameFieldRegistrationForm, _ := doc.Path("nameFieldRegistratinForm").Data().(bool)
+	emailFieldRegistrationForm, _ := doc.Path("emailFieldRegistratinForm").Data().(bool)
+
 	return &models.LivechatInitialData{
 		Enabled:                    doc.Path("enabled").Data().(bool),
 		Title:                      doc.Path("title").String(),
@@ -53,14 +57,14 @@ func initialLivechatDataFromDocument(doc *gabs.Container) *models.LivechatInitia
 		Visitor:                    doc.Path("visitor").Bytes(),
 		Triggers:                   doc.Path("triggers").Bytes(),
 		Departments:                doc.Path("departments").Bytes(),
-		AllowSwitchingDepartments:  doc.Path("allowSwitchDepartments").Data().(bool),
+		AllowSwitchingDepartments:  allowSwitchDepartments,
 		Online:                     doc.Path("online").Data().(bool),
 		OfflineColor:               doc.Path("offlineColor").String(),
 		OfflineMessage:             doc.Path("offlineMessage").String(),
 		OfflineSuccessMessage:      doc.Path("offlineSuccessMessage").String(),
 		OfflineUnavailableMessage:  doc.Path("offlineUnavailableMessage").String(),
-		NameFieldRegistrationForm:  doc.Path("nameFieldRegistratinForm").Data().(bool),
-		EmailFieldRegistrationForm: doc.Path("emailFieldRegistratinForm").Data().(bool),
+		NameFieldRegistrationForm:  nameFieldRegistrationForm,
+		EmailFieldRegistrationForm: emailFieldRegistrationForm,
 		OfflineTitle:               doc.Path("offlineTitle").String(),
 		Language:                   doc.Path("language").String(),
 		Transcript:                 doc.Path("transcript").Data().(bool),
