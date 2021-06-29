@@ -27,7 +27,7 @@ type LivechatInitialData struct {
 
 // LivechatMessage is a message sent to a live chat
 type LivechatMessage struct {
-	ID      string `json:"id"`
+	ID      string `json:"_id"`
 	RoomID  string `json:"rid"`
 	Message string `json:"msg"`
 	Token   string `json:"token"`
